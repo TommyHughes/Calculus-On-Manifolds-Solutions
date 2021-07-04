@@ -1,0 +1,328 @@
+\begin{enumerate}
+    \item[3.1] Let \( f: [0,1] \times [0,1] \rightarrow \mathbb{R} \) be defined by 
+    \[
+    f(x,y) = \begin{cases} 0 & \text{if } 0 \leq x < \frac{1}{2} \\ 1 & \text{if } \frac{1}{2} \leq x < 1 \end{cases}
+    \]
+    Show that \( f \) is integrable and that \( \int_{[0,1] \times [0,1]} f = \frac{1}{2} \)
+    
+    \begin{proof}
+    We see that for any partition \( P = (P_1,P_2) \) that admits
+    \[
+    \left\{0, \frac{1}{2}, 1 \right\} \subset P_1
+    \]
+    We have
+    \[
+    L(f,P) = U(f,P) = \frac{1}{2}
+    \]
+    Thus, if we have an arbitrary partition, \( P \), then, with the proper refinement and by Corollary 3-2, we obtain
+    \[
+    \int_{[0,1]\times[0,1]} f = \frac{1}{2}
+    \]
+    \end{proof}
+    
+    \item[3.2] Let \( f: A \rightarrow \mathbb{R} \) be integrable and let \( g=f \) except at finitely many points. Show \( g \) is integrable and \( \int_A f = \int_A g \).
+    \begin{proof}
+    Let us denote those values of \( x \) where \( g \) and \( f \) differ by \( x_1,\ldots,x_m \). We will show that \( \forall U(f,P) \), \( \exists_{P'} U(g,P') \leq U(f,P) \), and similar for the lower sums. This will imply that \( \forall P \), \( \exists P' \) such that
+    \[
+    L(f,P) \leq L(g, P') \leq U(g,P') \leq U(f,P)
+    \]
+    which, in turn, implies that \( g \) is integrable and that \( \int_A g = \int_A f \). So, given a partition, \( P \) we can first refine it by adding enough subrectangles so that each subrectangle contains at most one \( x_i \). Let us denote this partition \( P^* \). We can refine \( P^* \) by including subrectangles around each \( x_i \) with sufficiently small volume. This refinement we denote by,  \( P' \). Now, if \( S \) is a subrectangle in \( P^* \) that does not contain any \( x_i \) then 
+    \[
+    M_S(f)v(S) = M_S(g)v(S)
+    \]
+    If \( R \) is a subrectangle in \( P^* \) that does include an \( x_i \), then, in \( P' \), we have \linebreak \( R = \cup_j R_j \) where \( R_j \) is a subrectangle in  \( P' \) and \( x_i \in R_k \) for some \( k \). Note \( R_j \) does not contain any \( x_i \) for \( j \neq k \). But then \( M_{R_j}(g) \leq M_R(f) \) for all \( j \neq k \), and \( \sum_{j\neq k} v(R_j) < v(R) \) so that
+    \[
+    \sum_{j \neq k}M_{R_j}(g)v(R_j) < M_R(f)v(R)
+    \]
+    Since \( v(R_k) \) was sufficiently small, in the sense that
+    \[
+    M_{R_k}(g)v(R_k) < M_R(f)v(R) - \sum_{j \neq k}M_{R_i}(g)v(R_i)
+    \]
+    we get
+    \[
+    0 < M_R(f)v(R) - \sum_{j}M_{R_i}(g)v(R_i)
+    \]
+    But then \( U(f,P^*) \leq U(f, P) \) and
+    \begin{align*}
+        U(f, P^*) - U(g,P') &= \sum_{S \cup R} M_{S \cup R}(f)v(S \cup R) - \sum_{S \cup R'} M_{S \cup R'}(g)v(S \cup R') \\
+        &= \sum_R M_R(f)v(R) - \sum_{R'}M_{R'}(g)v(R') \\
+        &> 0 
+    \end{align*}
+    which implies
+    \[
+    U(g,P') \leq U(f, P)
+    \]
+    Similar reasoning produces an analogous result for the lower sums, which implies the conclusion. 
+    \end{proof}
+    
+    \item[3.3] 
+    \begin{proof}
+    \begin{enumerate}
+        \item Notice that for all \( x \in S \) we have
+        \[
+        m_S(f) + m_S(g) \leq f(x) + g(x) \hspace{1 mm} \text{ and } \hspace{1mm} f(x) + g(x) \leq M_S(f) + M_S(g)
+        \]
+        which implies that 
+        \begin{align*}
+        L(f,P) + L(g,P) &= \sum_S m_S(f)v(S) + \sum_S m_S(g)v(S) \\
+        &= \sum_S (m_S(f)+m_S(g))v(S) \\
+        & \leq \sum_S m_S(f+g)v(S) \\
+        &= L(f+g,P)
+        \end{align*}
+        and similar for the upper sums.
+        
+        \item Note that, for \( \epsilon > 0 \) given, for well-chosen \( P \), we have
+        \begin{align*}
+        \int_A f + \int_A g - \epsilon &< L(f,P) + L(g,P) \\
+        &\leq L(f+g, P) \\
+        &\leq U(f+g,P) \\
+        &\leq U(f,P) + U(g,P) \\
+        &< \int_A f + \int_A g + \epsilon
+        \end{align*}
+        which implies that \( \int_A f+g \) exists. Now, if for some \( P \)
+        \[
+        U(f+g,P) < \int_A f + \int_A g
+        \]
+        then there is \( P' \) such that
+        \[
+        U(f+g,P) < L(f,P') + L(g,P') < \int_A f + \int_A g
+        \]
+        which would imply \( U(f+g,P) < L(f+g,P') \) which is absurd. Combined with the above inequality, we get that for all \( \epsilon > 0 \), there exists \( P \) such that
+        \[
+        \int_A f + \int_A g < U(f+g,P) < \int_A f + \int_A g + \epsilon   
+        \]
+        Therefore, \( \int_A f+g = \int_A f + \int_A g \). 
+        
+        \item Two cases, too tedious.
+    \end{enumerate}
+    \end{proof}
+    
+    \item[3.4] Let \( f:A \rightarrow \mathbb{R} \) and let \( P \) be a partition of \( A \). Show that \( f \) is integrable if and only if for each subrectangle \( S \) the function \( f \vert S \) is integrable, and that in this case
+    \[
+    \int_A f = \sum_S \int_S f \vert S
+    \]
+    \begin{proof}
+    If \( P_S \) is the portion of the partition \( P \) which produces subrectangle \( S \), then
+    \begin{align*}
+        \sum_S U(f \vert S, P_S) &= U(f,P) \\
+        \sum_S L(f \vert S, P_S) &= L(f,P)
+    \end{align*}
+    So, there exists a refinement, \( P' \), of \( P \) such that
+    \begin{align*}
+        U(f,P') - L(f, P') &< \epsilon \\
+        \intertext{which implies}
+        \sum_S U(f \vert S, P'_S) - L(f \vert S, P'_S) < \epsilon
+    \end{align*}
+    which implies \( \sum_S \int_S f \vert S \) exists. Furthermore
+    \[
+    0 < U(f,P') - \int_A f < \epsilon
+    \]
+    which implies
+    \[
+    0 < \sum_S U(f \vert S, P'_S) - \int_A f < \epsilon
+    \]
+    which implies that
+    \[
+    \sum_S \int_S f \vert S = \int_A f
+    \]
+    \end{proof}
+    
+    \item[3.5] Let \( f,g:A \rightarrow \mathbb{R} \) be integrable and suppose \( f \leq g \). Show that \( \int_A f \leq \int_A g \).
+    \begin{proof}
+    Notice that for any \( P \)
+    \[
+    U(f,P) \leq U(g,P)
+    \]
+    By integrability of both \( f \) and \( g \), we get
+    \[
+    \int_A f = \inf_P U(f,P) \leq \inf_P U(g,P) = \int_A g
+    \]
+    \end{proof}
+    
+    \item[3.6] If \( f:A \rightarrow \mathbb{R} \) is integrable, show that \( \left|  f \right| \) is integrable and \( \left| \int_A f \right| \leq \int_A \left| f \right| \).
+    \begin{proof}
+    We wish to show that for any partition \( P \),
+    \[
+    M_S(\left| f \right|) - m_S(\left| f \right|) \leq M_S(f) - m_S(f)
+    \]
+    Notice that this is trivially true if \( \forall_{x \in S} f(x) \geq 0 \) or \( f(x) \leq 0 \). Otherwise, we observe that
+    \begin{enumerate}
+        \item \( m_S(f) < 0 \leq m_s(\left| f \right|) \leq M_S(f) \)
+    
+        \item Either \( M_S(\left| f \right|) = M_S(f) \) or \( M_S(\left| f \right|) = -m_S(f) \). 
+    \end{enumerate}
+    If \( M_S(\left| f \right|) = M_S(f) \) then
+    \[
+    M_S(\left| f \right|) - m_S(\left| f \right|) = M_S(f) - m_S(\left| f \right|) \leq M_S(f) - m_S(f)
+    \]
+    where the inequality comes from (a). If \( M_S(\left| f \right|) = -m_S(f) \) then
+    \[
+    M_S(\left| f \right|) - m_S(\left| f \right|) \leq M_S(\left| f \right|) = -m_S(f) \leq M_S(f) - m_S(f)
+    \]
+    Thus
+    \[
+    M_S(\left| f \right|) - m_S(\left| f \right|) \leq M_S(f) - m_S(f)
+    \]
+    which implies that \( \left| f \right| \) is integrable and
+    \[
+    \left| \int_A f \right| \leq \int_A \left| f \right|
+    \]
+    follows from the fact that \( \left| M_S(f) \right| \leq M_S(\left| f \right|) \), the integrability of \( \left| f \right| \), and the triangle inequality. 
+    \end{proof}
+    
+    \item[3.7] Let \( f: [0,1] \times [0,1] \rightarrow \mathbb{R} \) be defined by
+    \[
+    f(x,y) = \begin{cases} 0 &  x  \text{ is irrational} \\ 0 & x \text{ is rational}, y \text{ is irrational} \\ \frac{1}{q} & x \text{ is rational}, y = \frac{p}{q} \text{ in lowest terms} \end{cases}
+    \]
+    Show that \( f \) is integrable and \( \int_{[0,1] \times [0,1]}f = 0 \).
+    \begin{proof}
+    
+    \end{proof}
+    
+    \item[3.8] Prove that \( [a_1,b_1] \times \ldots \times [a_n,b_n] \) does not have content zero if \( a_i < b_i \) for each \( i \).
+    \begin{proof}
+    Similar to 3-5.
+    \end{proof}
+    
+    \item [3.9] \begin{enumerate}
+        \item Show that an unbounded set cannot have content \( 0 \).
+        
+        \item Give an example of a closed set with measure \( 0 \) which does not have content \( 0 \).
+    \end{enumerate}
+    \begin{proof}
+    \begin{enumerate}
+        \item Notice that given \( \{ U_1,\ldots,U_n \} \) we will get that \( \cup_{i=1}^n U_i \) is bounded and therefore cannot cover an unbounded set.
+        
+        \item \( \mathbb{N} \) is closed but unbounded and therefore cannot have content \( 0 \). However, given \( 0 < \epsilon < 1 \), if we take \( U_i \) to be the rectangle, centered at \( i \), such that \( v(U_i) = (\frac{\epsilon}{2})^i\) then
+        \[
+        \sum_{i=1}^\infty v(U_i) = \sum_{i=1}^\infty \left( \frac{\epsilon}{2} \right)^i = \frac{\epsilon}{2-\epsilon} < \epsilon 
+        \]
+    \end{enumerate}
+    \end{proof}
+    
+    \item[3.10] \begin{enumerate}
+        \item If \( C \) is a set of content \( 0 \), show that the boundary of \( C \) has content \( 0 \).
+        
+        \item Give an example a bounded set \( C \) of measure \( 0 \) such that the boundary of \( C \) does not have measure \( 0 \). 
+    \end{enumerate}
+    
+    \begin{proof}
+    \begin{enumerate}
+        \item If \( \{ U_1,\ldots, U_n\} \) is a cover of \( C \) then \( \cup_{i=1}^n U_i \) is closed and contains \( C \). Therefore, it contains the boundary of \( C \). So \( \{ U_1,\ldots,U_n \} \) is also a cover for the boundary of \( C \). Therefore, the boundary also has content \( 0 \).
+        
+        \item Notice that \( \mathbb{Q} \cap [0,1] \) is countable and therefore has measure \( 0 \). On the other hand the boundary is \( [0,1] \) which does not have measure \( 0 \). 
+    \end{enumerate}
+    \end{proof}
+    
+    \item[3.11] Let \( A \) be the set in problem 1.18. If \( \sum_{i=1}^\infty (b_i-a_i) < 1 \), show that the boundary of \( A \) does not have measure \( 0 \).
+    \begin{proof}
+    Suppose to the contrary. From 1.18, we know that \( \text{boundary}A = [0,1] \setminus A \). So \( [0,1] = A \cup \text{boundary}A \). Since we can use open rectangles, we have a cover of \( A \), \( \{ (a_i,b_i):i \in \mathbb{N} \}  \), and a cover of \( \text{boundary}A \), \( \{U_1,U_2,\ldots\} \), such that
+    \[
+    \sum_{i=1}^\infty v(U_i) < 1 - \sum_{i=1}^\infty (b_i-a_i)
+    \]
+    But then \( \{ (a_i, b_i): i \in \mathbb{N} \} \cup \{ U_1,U_2,\ldots \} \) forms a cover of \( [0,1] \). But 
+    \[
+    \sum_{i=1}^\infty v(U_i) + \sum_{i=1}^\infty (b_i-a_i) < 1
+    \]
+    which would contradict with it being a cover of \( [0,1] \).
+    \end{proof}
+    
+    \item[3.12] Let \( f:[a,b] \rightarrow \mathbb{R} \) be an increasing function. Show that \( \{x: f(x) \text{ is discontinuous at }x\} \) has measure \( 0 \).
+    \begin{proof}
+    First we will show that \( \{x: o(f,x) > \frac{1}{n} \} \) is finite for any given \( n \). To this end, we suppose to the contrary, that there exists an \( n \in \mathbb{N} \) so that we have \( \{x: o(f,x) > \frac{1}{n} \} \) is infinite. Then we can select a countable sequence of distinct elements from it: 
+    \[
+    x_0 < x_1 < x_2 < \ldots
+    \]
+    So, by \( f \) increasing, we get that for every \( k \)
+    \[
+    f(x_k)-f(x_0) = \sum_{i=1}^k f(x_i)-f(x_{i-1}) \geq \sum_{i=1}^k \frac{1}{n} = \frac{k}{n}
+    \]
+    which would imply that \( f \) is not bounded from above on \( [a,b] \) contradicting with \( f(x) \leq f(b) \) for all \( x \in [a,b] \). Thus
+    \[
+    \left\{ x: \exists n \text{ such that } o(f,x) > \frac{1}{n} \right\}
+    \]
+    is at most countable, and therefore has measure \( 0 \). But, by Theorem 1.10, \( f \) is continuous at \( x \) iff \( o(f,x) = 0 \). Therefore, \( \{x: f(x) \text{ is discontinuous at }x\} \) has measure \( 0 \).
+    \end{proof}
+    
+    \item[3.13]
+    
+    \item[3.14] Show if \( f,g:A \rightarrow \mathbb{R} \) are integrable, then so is \( f\cdot g \).
+    \begin{proof}
+    Notice that \( (f \cdot g)(x) \) is continuous wherever both \( f \) and \( g \) are. Since both \( f \) and \( g \) are continuous, it follows that both \( \{ x: f \text{ is not continuous at } x \} \) and \( \{ x: g \text{ is not continuous at } x \} \) have measure zero. This implies
+    \( \{ x: f\cdot g \text{ is not continuous at } x \} \) has measure zero. Therefore \( f \cdot g \) is integrable.
+    \end{proof}
+    
+    \item[3.15] Show that if \( C \) has content \( 0 \), then \( C \subset A \) for some closed rectangle \( A \) and \( C \) is Jordan-measurable and \( \int_A \chi_C = 0 \).
+    \begin{proof}
+    Since \( C \) has content zero, \( C \subset \cup_{i=1}^n U_i \subset A \) for some rectangle \( A \), where the latter inclusion follows from boundedness of the union. Notice that \( \cup_{i=1}^n U_i \) contains the closure of \( C \) and therefore its boundary. Therefore, the boundary of \( C \) has content \( 0 \) and so \( C \) is Jordan-measurable. Finally, notice that if \( P \) is a partition containing the cover \( \{U_i\} \), then \( U(f,P) = \sum v(U_i) < \epsilon \), implying \( \int_A \chi_C = 0 \).
+    \end{proof}
+    
+    \item[3.16] Give an example of a bounded set \( C \) of measure \( 0 \) such that \( \int_A \chi_C \) does not exist.
+    
+    \begin{proof}
+    If \( C = \mathbb{Q} \cap [0,1] \) then clearly \( C \) is bounded. Moreover, since \( C \subset \mathbb{Q} \) and \( \mathbb{Q} \) has measure \( 0 \), it follows \( C \) has measure \( 0 \). Furthermore, boundary \( C = [0,1] \) which clearly does not have measure \( 0 \). Therefore, \( \chi_C \) is not integrable, and \( \int_A \chi_C \) does not exist.
+    \end{proof}
+    
+    \item[3.17] If \( C \) is a bounded set of measure \( 0 \) and \( \int_A \chi_C \) exists, show that \( \int_A \chi_C = 0 \).
+    
+    \begin{proof}
+    We claim that if \( U \) is a (non-degenerate) rectangle, then \( U \not\subset C \), for otherwise, by problem 3.8, \( C \) would not have measure \( 0 \). Therefore, it follows that if \( U \) is a rectangle then \( U \) contains points not in \( C \). Therefore \( L(\chi_C, P) = 0 \) for every partition \( P \) which, by integrability of \( \chi_C \), implies that \( \int_A \chi_C = 0 \).
+    \end{proof}
+    
+    \item[3.18] If \( f:A \rightarrow \mathbb{R} \) is nonnegative and \( \int_A f = 0 \), show that \( \{ x: f(x) \neq 0 \} \) has measure \( 0 \).
+    
+    \begin{proof}
+    Observe that our hypotheses on \( f \) imply that for any subrectangle, \( S \), we have that \( m_S(f) = 0 \). In order to obtain a contradiction, let us suppose that there is \( c \in A \) such that \( f(c) \neq 0 \) and \( f \) is continuous at \( c \). But then there exists some subrectangle \( S \) such that \( x \in S \) implies
+    \[
+    \left| f(x) - f(c) \right| < \frac{f(c)}{2}
+    \]
+    which further implies that \( 0 < \frac{f(c)}{2} \leq f(x) \) for all \( x \in S \), contradicting with \( m_S(f) = 0 \). Therefore \( \{x: f(x) \neq 0 \} \subset \{ x: f \text{ is not continuous at } x \} \). Integrability of \( f \) and Theorem 3-8 imply the result.
+    \end{proof}
+    
+    \item[3.19] Let \( U \) be the open set of Problem 3.11. Show that if \( f = \chi_U \) except on a set of measure \( 0 \), then \( f \) is not integrable on \( [0,1] \).
+    
+    \item[3.20] Show that an increasing function \( f:[a,b] \rightarrow \mathbb{R} \) is integrable on \( [a,b] \).
+    
+    \begin{proof}
+    Let \( B \) be defined as in Theorem 3.8. Notice, by \( f \) increasing, we have 
+    \[
+    f(a) + \sum_{i=1}^\infty o(f,\beta_i) \leq f(b)
+    \]
+    for any countable subcollection \( \{ \beta_i: \beta \in B, i \in \mathbb{N} \} \). But then
+    \[
+    B_n = \left\{ \beta : o(f,\beta) \geq \frac{1}{n} \right\}
+    \]
+    is finite for every \( n \geq 2 \). But then
+    \[
+    B = \bigcup_{n=2}^\infty B_n
+    \]
+    is at most countable. Therefore, by Theorem 3.8, it follows that \( f \) is integrable.
+    \end{proof}
+    
+    \item[3.21] If \( A \) is a closed rectangle, show that \( C \subset A \) is Jordan-measurable if and only if for every \( \epsilon > 0 \) there exists a partition \( P \) of \( A \) such that \( \sum_{S \in \mathcal{S}_1} v(S) - \sum_{S \in \mathcal{S}_2} < \epsilon \) where \( \mathcal{S}_1 \) consists of all subrectangles intersecting \( C \) and \( \mathcal{S}_2 \) all subrectangles contained in \( C \).
+    
+    \begin{proof}
+    Notice that 
+    \[
+    \mathcal{S}_1 = \mathcal{S}_2 \cup \mathcal{S}_3
+    \]
+    where \( \mathcal{S}_3 \) is the collection of subrectangles that intersect with \( C \) but are not contained in \( C \). Thus the expression
+    \[
+    \sum_{S \in \mathcal{S}_1} v(S) - \sum_{S \in \mathcal{S}_2} v(S) < \epsilon
+    \]
+    is equivalent to
+    \[
+    \sum_{S \in \mathcal{S}_2 \cup \mathcal{S}_3} v(S) - \sum_{S \in \mathcal{S}_2} v(S) =  \sum_{S \in \mathcal{S}_2} v(S) + \sum_{S \in \mathcal{S}_3} v(S) - \sum_{S \in \mathcal{S}_2} v(S) = \sum_{S \in \mathcal{S}_3} v(S) < \epsilon
+    \]
+    which is equivalent to \( C \) having boundary with measure zero, and therefore, Jordan-measurable.
+    \end{proof}
+    
+    \item[3.22] If \( A \) is a Jordan-measurable set and \( \epsilon > 0 \), show that there is a compact Jordan-measurable set \( C \subset A \) such that \( \int_{A\setminus C}1 < \epsilon \).
+    
+    \begin{proof}
+    Set \( C = \mathcal{S}_2 \), where \( \mathcal{S}_2 \) is as defined in problem 3.21.
+    \end{proof}
+    
+    \item[3.23] Let \( C \subset A \times B \) be a set of content \( 0 \). Let \( A' \subset A \) be the set of all \( x \in A \) such that \( \{ y \in B: (x,y) \in C \} \) is \emph{not} of content \( 0 \). Show that \( A' \) is a set of measure \( 0 \). 
+    
+\end{enumerate}
